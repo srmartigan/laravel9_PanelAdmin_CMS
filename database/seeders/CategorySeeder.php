@@ -16,9 +16,8 @@ class CategorySeeder extends Seeder
     public function run()
     {
         Category::factory()->create([
-            'name' => 'Categoria de prueba',
-            'description' => 'Cur rumor ridetis? Sea-dogs scream from beauties like small pins. The carnivorous hur
-                           q finally desires the particle.',
+            'name' => 'Undefined',
+            'description' => 'Undefined category',
         ]);
     }
 }
