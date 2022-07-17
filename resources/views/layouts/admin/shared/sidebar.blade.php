@@ -47,6 +47,14 @@
                         </li>
                     </ul>
                 </li>
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a href="{{route('admin.categories.index')}}" class="nav-link">
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>Categorias</p>
+                        </a>
+                    </li>
+                </ul>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
