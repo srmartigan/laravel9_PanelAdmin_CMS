@@ -30,7 +30,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h2>Listado Posts
-                            <a href="{{route('admin.categories.create')}}" class="btn btn-primary float-right">Nuevo Posts</a>
+                            <a href="{{route('admin.posts.create')}}" class="btn btn-primary float-right">Nuevo Posts</a>
                         </h2>
                     </div>
 

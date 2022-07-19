@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
@@ -23,11 +24,13 @@ class PostController extends Controller
 
     public function create(): View
     {
-        return view('admin.Post.index');
+        $categories = Category::all();
+        return view('admin.Post.create', compact('categories'));
     }
 
     public function store(StorePostRequest $request): RedirectResponse
     {
+
         $post = Post::query()->create([
             'title' => $request['title'],
             'slug' => $request['slug'],
@@ -50,16 +53,16 @@ class PostController extends Controller
 
     public function edit(Post $post): View
     {
-        return view('admin.Post.edit', compact('post'));
+        $categories = Category::all();
+        return view('admin.Post.edit', compact('post', 'categories'));
     }
 
     public function update(UpdatePostRequest $request, Post $post)
     {
-
         $post->title = $request['title'];
         $post->slug = $request['slug'];
         $post->content = $request['content'];
-        //$post->category_id = $request['category_id'];
+        $post->category_id = $request['category_id'];
 
         $post->save();
         return redirect()->route('admin.posts.index');

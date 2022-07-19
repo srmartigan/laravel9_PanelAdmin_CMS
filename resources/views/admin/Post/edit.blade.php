@@ -1,6 +1,6 @@
 @extends('layouts.admin.admin')
 
-@section('titulo', 'Editar Categoría')
+@section('titulo', 'Editar Post')
 
 @section('content')
     <div class="container">
@@ -51,10 +51,29 @@
                                 <textarea id="content"
                                          class="form-control"
                                        @error('content') is-invalid @enderror
-                                       name="content" required autofocus autocomplete="off">
-                                    {{ $post->content }}</textarea>
+                                       name="content" required autofocus autocomplete="off">{{ $post->content }}</textarea>
 
                                 @error('content')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="row mb-12">
+                                <label for="category_id">Categoría</label>
+                                <select id="category_id"
+                                        class="form-control
+                                        @error('category_id') is-invalid @enderror"
+                                        name="category_id" required autofocus>
+                                    <option value="">Seleccione una categoría</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}"
+                                                {{ $post->category_id == $category->id ? 'selected' : '' }}>
+                                            {{ $category->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('category_id')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
