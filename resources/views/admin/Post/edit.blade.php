@@ -10,9 +10,10 @@
                     <div class="card-header"><h4 class="text-center"><strong> Editar Post </strong></h4></div>
 
                     <div class="card-body col-8 offset-2 text-center">
-                        <form method="POST" action="{{ route('admin.categories.update', $post) }}">
-                            @csrf
+                        <form method="POST" action="{{ route('admin.posts.update', $post) }}">
                             @method('PUT')
+                            @csrf
+
 
                             <div class="row mb-12">
                                 <label for="title">Titulo</label>
@@ -48,8 +49,8 @@
                             <div class="row mb-12">
                                 <label for="content">Contenido</label>
                                 <textarea id="content"
-                                         class="form-control
-                                       @error('content') is-invalid @enderror"
+                                         class="form-control"
+                                       @error('content') is-invalid @enderror
                                        name="content" required autofocus autocomplete="off">
                                     {{ $post->content }}</textarea>
 

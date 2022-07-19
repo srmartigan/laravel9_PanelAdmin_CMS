@@ -55,12 +55,12 @@ class PostController extends Controller
 
     public function update(UpdatePostRequest $request, Post $post)
     {
-        $post->update([
-            'title' => $request['title'],
-            'slug' => $request['slug'],
-            'content' => $request['content'],
-            'category_id' => $request['category_id'],
-        ]);
+
+        $post->title = $request['title'];
+        $post->slug = $request['slug'];
+        $post->content = $request['content'];
+        //$post->category_id = $request['category_id'];
+
         $post->save();
         return redirect()->route('admin.posts.index');
     }
