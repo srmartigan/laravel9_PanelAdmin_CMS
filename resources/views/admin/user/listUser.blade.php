@@ -14,7 +14,6 @@
                 @endif
 
 
-
                 <div class="card">
                     <div class="card-header">
                         <h2>Listado Usuarios
@@ -56,7 +55,6 @@
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                                         </form>
-
                                     </td>
                                 </tr>
                             @endforeach
