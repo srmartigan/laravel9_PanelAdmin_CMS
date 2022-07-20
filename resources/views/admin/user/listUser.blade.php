@@ -5,22 +5,12 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
 
-                <!-- alert success create usuario -->
+                <!-- alerts success and error -->
                 @if (session('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>{{ session('success') }}</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+                    <x-alert type="success" :message="session('success')"></x-alert>
                 @endif
                 @if (session('error'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>{{ session('error') }}</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+                    <x-alert type="error" :message="session('error')"></x-alert>
                 @endif
 
 

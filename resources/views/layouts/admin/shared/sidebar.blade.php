@@ -55,6 +55,15 @@
                         </a>
                     </li>
                 </ul>
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a href="{{route('admin.posts.index')}}" class="nav-link">
+                            <i class="nav-icon fa fa-edit "></i>
+                            <p>Posts</p>
+                        </a>
+                    </li>
+                </ul>
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
