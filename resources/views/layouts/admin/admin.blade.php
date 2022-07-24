@@ -20,6 +20,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.6.0/jq-3.6.0/dt-1.12.1/datatables.min.css"/>
+    @yield('styles css')
 
 </head>
 <body class="hold-transition sidebar-mini">
@@ -52,9 +53,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
-                <div class="row">
+
                     @yield('content')
-                </div>
+
             </div>
         </div>
         <!-- Main Footer -->

@@ -25,7 +25,7 @@ class StorePostRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
-            'content' => 'string|max:255|nullable',
+            'content' => 'string|nullable',
         ];
     }
 }

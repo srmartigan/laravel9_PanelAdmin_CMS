@@ -11,6 +11,7 @@ use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\View;
+use Intervention\Image\Facades\Image;
 
 
 class PostController extends Controller
@@ -28,7 +29,8 @@ class PostController extends Controller
         return view('admin.Post.create', compact('categories'));
     }
 
-    public function store(StorePostRequest $request): RedirectResponse
+
+    public function store(StorePostRequest $request)
     {
 
         $post = Post::query()->create([
@@ -59,7 +61,7 @@ class PostController extends Controller
 
     public function update(UpdatePostRequest $request, Post $post)
     {
-
+//return ($request);
         $post->title = $request['title'];
         $post->slug = $request['slug'];
         $post->content = $request['content'];

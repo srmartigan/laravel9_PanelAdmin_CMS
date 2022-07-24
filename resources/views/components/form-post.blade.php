@@ -27,7 +27,7 @@
                 @enderror
             </div>
 
-            <div class="row mb-12">
+            <div class="row mb-12 mt-4">
                 <label for="slug">slug</label>
                 <input id="slug"
                        type="text"
@@ -43,20 +43,13 @@
                                     </span>
                 @enderror
             </div>
-            <div class="row mb-12">
-                <label for="content">Contenido</label>
-                <textarea id="content"
-                          class="form-control"
-                          @error('content') is-invalid @enderror
-                          name="content" required autofocus autocomplete="off">{{ $post->content ?? ''}}</textarea>
 
-                @error('content')
-                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                @enderror
+            <div class="row mb-12 mt-4">
+                <label for="editor">Contenido</label>
             </div>
-            <div class="row mb-12">
+            <textarea id="editor" name="content" rows="30" cols="50">{{ $post->content ?? ''}}</textarea>
+
+            <div class="row mb-12 mt-4">
                 <label for="category_id">Categoría</label>
                 <select id="category_id"
                         class="form-control

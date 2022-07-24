@@ -26,7 +26,7 @@ class UpdatePostRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'slug' => 'required|string|max:255',
-            'content' => 'nullable|string|max:255',
+            'content' => 'nullable|string',
             'category_id' => 'required|integer',
         ];
     }
