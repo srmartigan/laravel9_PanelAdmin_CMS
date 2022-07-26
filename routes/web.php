@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -28,9 +29,13 @@ Route::group(['middleware' => ['verified','auth'], 'as' => 'admin.'] , function 
     Route::resource('users',UserController::class);
     Route::resource('categories',CategoryController::class);
     Route::resource('posts',PostController::class);
+    Route::post('upload', [UploadController::class,'upload'])->name('upload');
 });
 
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Ruta para subir imágenes al servidor desde CKEDITOR 5
+

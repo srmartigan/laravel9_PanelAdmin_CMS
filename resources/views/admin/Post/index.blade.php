@@ -37,7 +37,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Titulo</th>
-                                <th>Articulo</th>
+                                <th>Categoria</th>
                                 <th>Acciones</th>
                             </tr>
                             </thead>
@@ -46,7 +46,7 @@
                                 <tr>
                                     <td>{{ $post->id }}</td>
                                     <td>{{ $post->title }}</td>
-                                    <td>{{ $post->content }}</td>
+                                    <td>{{ $post->category->name }}</td>
                                     <td>
                                         <a href="{{ route('admin.posts.edit', $post) }}"
                                            class="btn btn-warning btn-sm">Editar</a>
