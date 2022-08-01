@@ -29,7 +29,6 @@ class PostController extends Controller
         return view('admin.Post.create', compact('categories'));
     }
 
-
     public function store(StorePostRequest $request)
     {
 

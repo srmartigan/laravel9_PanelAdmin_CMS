@@ -29,7 +29,7 @@
 
                 // URL where to send files.
                 this.url = '{{ route('admin.upload') }}';
-                console.log(this.url);
+                //console.log(this.url);
             }
 
             // Starts the upload process.
