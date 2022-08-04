@@ -29,14 +29,17 @@ class Post
         return new Post($title, $content, $slug);
     }
 
+    public function update(PostId $id, PostTitle $title, PostContent $content, PostSlug $slug): void
+    {
+        $this->id = $id;
+        $this->title = $title;
+        $this->content = $content;
+        $this->slug = $slug;
+    }
+
     public function getId(): int
     {
         return $this->id->value();
-    }
-
-    public function setId(int $id): void
-    {
-        $this->id = new PostId($id);
     }
 
     public function getTitle(): string
