@@ -13,21 +13,29 @@ use Src\Post\Domain\ValueObjects\PostSlug;
 
 final class UpdatePostUseCase {
 
-    private PostRepository $postRepository;
+    private PostRepository $repository;
 
     public function __construct(PostRepository $postRepository) {
-        $this->postRepository = $postRepository;
+        $this->repository = $postRepository;
     }
 
-    public function __invoke(int $id, string $title, string $content, string $slug): Post
+    public function __invoke(int    $id,
+                             string $title,
+                             string $content,
+                             string $slug,
+                             int    $categoryId): Post
     {
-        $post = $this->postRepository->find($id);
-        $post->update(
+        $findPostByIdUseCase = new FindPostByIdUseCase($this->repository);
+        $postDomain = $findPostByIdUseCase($id);
+
+        //Creamos postDomain con los datos actualizados
+        $postDomain->update(
             new PostId($id),
             new PostTitle($title),
             new PostContent($content),
-            new PostSlug($slug)
+            new PostSlug($slug),
+            $categoryId
         );
-        return $this->postRepository->Update($post);
+        return $this->repository->Update($postDomain);
     }
 }

@@ -16,28 +16,28 @@ class Post
     private PostTitle $title;
     private PostContent $content;
     private PostSlug $slug;
-    private int $categoriaId;
+    private int $categoryId;
 
-    private function __construct(string $title, string $content, string $slug, int  $categoriaId)
+    private function __construct(string $title, string $content, string $slug, int  $categoryId)
     {
         $this->title = new PostTitle($title);
         $this->content = new PostContent($content);
         $this->slug = new PostSlug($slug);
-        $this->categoriaId = $categoriaId;
+        $this->categoryId = $categoryId;
     }
 
-    static function create($title, $content, $slug, $categoriaId): Post
+    static function create($title, $content, $slug, $categoryId): Post
     {
-        return new Post($title, $content, $slug, $categoriaId);
+        return new Post($title, $content, $slug, $categoryId);
     }
 
-    public function update(PostId $id, PostTitle $title, PostContent $content, PostSlug $slug, int $categoriaId): void
+    public function update(PostId $id, PostTitle $title, PostContent $content, PostSlug $slug, int $categoryId): void
     {
         $this->id = $id;
         $this->title = $title;
         $this->content = $content;
         $this->slug = $slug;
-        $this->categoriaId = $categoriaId;
+        $this->categoryId = $categoryId;
     }
 
     public function getId(): int
@@ -47,7 +47,7 @@ class Post
 
     public function getCategoryId(): int
     {
-        return $this->categoriaId;
+        return $this->categoryId;
     }
     public function getTitle(): string
     {

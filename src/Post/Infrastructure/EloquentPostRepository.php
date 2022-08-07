@@ -18,7 +18,15 @@ class EloquentPostRepository implements \Src\Post\Domain\PostRepository
 
     public function findById(int $id): Post
     {
-        // TODO: Implement findById() method.
+        $postEloquent = $this->postEloquentModel->find($id);
+
+        $postDomain = Post::create(
+            $postEloquent->title,
+            $postEloquent->content,
+            $postEloquent->slug,
+            $postEloquent->category_id);
+
+        return $postDomain;
     }
 
     public function findBySlug(string $slug): Post
@@ -52,9 +60,15 @@ class EloquentPostRepository implements \Src\Post\Domain\PostRepository
         return $postDomain;
     }
 
-    public function update(\Src\Post\Domain\Post $post): Post
+    public function update(Post $post): Post
     {
-        // TODO: Implement update() method.
+        $postEloquent = $this->postEloquentModel::query()->find($post->getId());
+        $postEloquent['title'] = $post->getTitle();
+        $postEloquent['slug'] = $post->getSlug();
+        $postEloquent['content'] = $post->getContent();
+        $postEloquent['category_id'] = $post->getCategoryId();
+        $postEloquent->save();
+        return $post;
     }
 
     public function delete(int $id): void

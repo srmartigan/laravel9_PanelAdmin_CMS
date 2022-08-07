@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Post;
 use Illuminate\View\View;
 use Src\Post\Infrastructure\CreatePostController;
+use Src\Post\Infrastructure\UpdatePostController;
 
 class PostController extends Controller
 {
@@ -50,13 +51,8 @@ class PostController extends Controller
 
     public function update(UpdatePostRequest $request, Post $post)
     {
-//return ($request);
-        $post->title = $request['title'];
-        $post->slug = $request['slug'];
-        $post->content = $request['content'];
-        $post->category_id = $request['category_id'];
-
-        $post->save();
+        $updatePostController = new UpdatePostController();
+        $updatePostController($post->id, $request['title'], $request['content'], $request['slug'], (int)$request['category_id']);
         return redirect()->route('admin.posts.index')->with('success', 'Post updated successfully.');
     }
 
