@@ -54,7 +54,7 @@ class PostController extends Controller
     public function update(UpdatePostRequest $request, Post $post): RedirectResponse
     {
         $updatePostController = new UpdatePostController();
-        $updatePostController($post->id, $request['title'], $request['content'], $request['slug'], (int)$request['category_id']);
+        $updatePostController($post['id'], $request['title'], $request['content'], $request['slug'], (int)$request['category_id']);
         return redirect()->route('admin.posts.index')->with('success', 'Post updated successfully.');
     }
 
