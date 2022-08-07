@@ -11,7 +11,7 @@ interface PostRepository
     public function findBySlug(string $slug): Post;
     public function findByTitle(string $title): Post;
     public function findAll(): array;
-    public function save(Post $post): Post;
-    public function update(Post $post): Post;
+    public function save(Post $postDomain): Post;
+    public function update(Post $postDomain): Post;
     public function delete(int $id): void;
 }

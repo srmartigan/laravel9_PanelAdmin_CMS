@@ -6,9 +6,6 @@ namespace Src\Post\Application;
 
 use Src\Post\Domain\Post;
 use Src\Post\Domain\PostRepository;
-use Src\Post\Domain\ValueObjects\PostContent;
-use Src\Post\Domain\ValueObjects\PostSlug;
-use Src\Post\Domain\ValueObjects\PostTitle;
 
 final class CreatePostUseCase
 {
@@ -19,14 +16,10 @@ final class CreatePostUseCase
         $this->repository = $repository;
     }
 
-    public function __invoke(string $PostTitle, string $PostContent, string $PostSlug): void
+    public function __invoke(string $postTitle, string $postContent, string $postSlug, int $categoriaId): Post
     {
-        $title = new PostTitle($PostTitle);
-        $content = new PostContent($PostContent);
-        $slug = new PostSlug($PostSlug);
+        $post = Post::create($postTitle, $postContent, $postSlug, $categoriaId);
 
-        $post = Post::create($title, $content, $slug);
-
-        $this->repository->save($post);
+        return $this->repository->save($post);
     }
 }

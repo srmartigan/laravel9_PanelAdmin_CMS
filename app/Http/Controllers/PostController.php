@@ -8,11 +8,8 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Category;
 use App\Models\Post;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Redirector;
 use Illuminate\View\View;
-use Intervention\Image\Facades\Image;
-
+use Src\Post\Infrastructure\CreatePostController;
 
 class PostController extends Controller
 {
@@ -31,16 +28,9 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
+        $createPostController = new CreatePostController();
+        $createPostController($request['title'], $request['content'], $request['slug'], (int)$request['category_id']);
 
-        $post = Post::query()->create([
-            'title' => $request['title'],
-            'slug' => $request['slug'],
-            'content' => $request['content'],
-            'user_id' => auth()->id(),
-            'category_id' => $request['category_id'],
-        ]);
-
-        $post->save();
         return redirect()->route('admin.posts.index')->with('success', 'Post created successfully.');
 
     }
