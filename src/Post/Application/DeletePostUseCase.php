@@ -16,14 +16,6 @@ final class DeletePostUseCase {
 
     public function __invoke(int $id): void {
 
-        // comprobamos que el post existe
-        $post = $this->postRepository->findById($id);
-
-        if (!$post) {
-            throw new \DomainException('Post not found');
-        }
-
-        // borramos el post
         $this->postRepository->delete($id);
     }
 }

@@ -9,7 +9,9 @@ use App\Http\Requests\UpdatePostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use Src\Post\Infrastructure\CreatePostController;
+use Src\Post\Infrastructure\DeletePostController;
 use Src\Post\Infrastructure\UpdatePostController;
 
 class PostController extends Controller
@@ -27,7 +29,7 @@ class PostController extends Controller
         return view('admin.Post.create', compact('categories'));
     }
 
-    public function store(StorePostRequest $request)
+    public function store(StorePostRequest $request): RedirectResponse
     {
         $createPostController = new CreatePostController();
         $createPostController($request['title'], $request['content'], $request['slug'], (int)$request['category_id']);
@@ -49,7 +51,7 @@ class PostController extends Controller
         return view('admin.Post.edit', compact('post', 'categories'));
     }
 
-    public function update(UpdatePostRequest $request, Post $post)
+    public function update(UpdatePostRequest $request, Post $post): RedirectResponse
     {
         $updatePostController = new UpdatePostController();
         $updatePostController($post->id, $request['title'], $request['content'], $request['slug'], (int)$request['category_id']);
@@ -57,9 +59,11 @@ class PostController extends Controller
     }
 
 
-    public function destroy(Post $post)
+    public function destroy(Post $post): RedirectResponse
     {
-        $post->delete();
+       $deletePostController = new DeletePostController();
+       $deletePostController($post['id']);
+
         return redirect()->route('admin.posts.index');
     }
 }

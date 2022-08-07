@@ -6,8 +6,9 @@ namespace Src\Post\Infrastructure;
 
 use App\Models\Post as PostEloquentModel;
 use Src\Post\Domain\Post;
+use Src\Post\Domain\PostRepository;
 
-class EloquentPostRepository implements \Src\Post\Domain\PostRepository
+class EloquentPostRepository implements PostRepository
 {
     private PostEloquentModel $postEloquentModel;
 
@@ -18,30 +19,57 @@ class EloquentPostRepository implements \Src\Post\Domain\PostRepository
 
     public function findById(int $id): Post
     {
-        $postEloquent = $this->postEloquentModel->find($id);
+        $postEloquent = $this->postEloquentModel->query()->find($id);
 
         $postDomain = Post::create(
-            $postEloquent->title,
-            $postEloquent->content,
-            $postEloquent->slug,
-            $postEloquent->category_id);
+            $postEloquent['title'],
+            $postEloquent['content'],
+            $postEloquent['slug'],
+            $postEloquent['category_id']);
 
         return $postDomain;
     }
 
     public function findBySlug(string $slug): Post
     {
-        // TODO: Implement findBySlug() method.
+        $postEloquent = $this->postEloquentModel->query()->find($slug);
+
+        $postDomain = Post::create(
+            $postEloquent['title'],
+            $postEloquent['content'],
+            $postEloquent['slug'],
+            $postEloquent['category_id']);
+
+        return $postDomain;
     }
 
     public function findByTitle(string $title): Post
     {
-        // TODO: Implement findByTitle() method.
+        $postEloquent = $this->postEloquentModel->query()->find($title);
+
+        $postDomain = Post::create(
+            $postEloquent['title'],
+            $postEloquent['content'],
+            $postEloquent['slug'],
+            $postEloquent['category_id']);
+
+        return $postDomain;
     }
 
     public function findAll(): array
     {
-        // TODO: Implement findAll() method.
+        $postsEloquent = PostEloquentModel::all();
+
+        $postsDomain = [];
+        foreach ($postsEloquent as $postEloquent) {
+            $postsDomain[] = Post::create(
+                $postEloquent['title'],
+                $postEloquent['content'],
+                $postEloquent['slug'],
+                $postEloquent['category_id']);
+        }
+
+        return $postsDomain;
     }
 
 
@@ -73,6 +101,11 @@ class EloquentPostRepository implements \Src\Post\Domain\PostRepository
 
     public function delete(int $id): void
     {
-        // TODO: Implement delete() method.
+        $postEloquent = $this->postEloquentModel::query()->find($id);
+
+        if (!$postEloquent) {
+            throw new \DomainException('Post not found');
+        }
+        $postEloquent->delete();
     }
 }
