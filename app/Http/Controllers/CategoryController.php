@@ -41,12 +41,12 @@ class CategoryController extends Controller
         //
     }
 
-    public function edit(Category $category)
+    public function edit(Category $category) : View
     {
         return view('admin.Category.edit', compact('category'));
     }
 
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function update(UpdateCategoryRequest $request, Category $category): RedirectResponse
     {
         $category->name = $request->name;
         $category->description = $request->description;
@@ -55,7 +55,7 @@ class CategoryController extends Controller
         return redirect()->route('admin.categories.index')->with('success', 'Category updated successfully.');
     }
 
-    public function destroy(Category $category)
+    public function destroy(Category $category): RedirectResponse
     {
         //TODO: Solo se puede eliminar si no tiene posts asociados.
         $category->delete();
