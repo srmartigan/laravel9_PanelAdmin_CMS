@@ -7,7 +7,7 @@ use Src\Category\Domain\ValueObjects\CategoryDescription;
 use Src\Category\Domain\ValueObjects\CategoryId;
 use Src\Category\Domain\ValueObjects\CategoryName;
 
-class EditCategoryUseCase
+class UpdateCategoryUseCase
 {
     private CategoryRepository $categoryRepository;
 
@@ -16,10 +16,10 @@ class EditCategoryUseCase
         $this->categoryRepository = $categoryRepository;
     }
 
-    public function __invoke(string $id, string $name, string $description): void
+    public function __invoke(int $id, string $name, string $description): void
     {
         $category = $this->categoryRepository->find(new CategoryId($id));
         $category->update(new CategoryId($id), new CategoryName($name), new CategoryDescription($description));
-        $this->categoryRepository->save($category);
+        $this->categoryRepository->update($category);
     }
 }

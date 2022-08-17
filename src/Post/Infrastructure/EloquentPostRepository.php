@@ -27,6 +27,8 @@ class EloquentPostRepository implements PostRepository
             $postEloquent['slug'],
             $postEloquent['category_id']);
 
+        $postDomain->setId($postEloquent['id']);
+
         return $postDomain;
     }
 

@@ -44,6 +44,10 @@ class Post
     {
         return $this->id->value();
     }
+    public function setId(string $id): void
+    {
+        $this->id = new PostId((int)$id);
+    }
 
     public function getCategoryId(): int
     {

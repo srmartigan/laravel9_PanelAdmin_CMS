@@ -9,6 +9,11 @@ use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Src\Category\Application\CreateCategoryUseCase;
+use Src\Category\Infrastructure\CreateCategoryController;
+use Src\Category\Infrastructure\DeleteCategoryController;
+use Src\Category\Infrastructure\EloquentCategoryRepository;
+use Src\Category\Infrastructure\UpdateCategoryController;
 
 class CategoryController extends Controller
 {
@@ -27,11 +32,9 @@ class CategoryController extends Controller
 
     public function store(StoreCategoryRequest $request): RedirectResponse
     {
-        $category = Category::create([
-            'name' => $request->name,
-            'description' => $request->description,
-        ]);
-        $category->save();
+
+        $createCategory = new CreateCategoryController();
+        $createCategory->__invoke($request->name, $request->description);
 
         return redirect()->route('admin.categories.index')->with('success', 'Category created successfully.');
     }
@@ -48,9 +51,8 @@ class CategoryController extends Controller
 
     public function update(UpdateCategoryRequest $request, Category $category): RedirectResponse
     {
-        $category->name = $request->name;
-        $category->description = $request->description;
-        $category->save();
+        $updateCategory = new UpdateCategoryController();
+        $updateCategory->__invoke($category->id, $request->name, $request->description);
 
         return redirect()->route('admin.categories.index')->with('success', 'Category updated successfully.');
     }
@@ -58,7 +60,10 @@ class CategoryController extends Controller
     public function destroy(Category $category): RedirectResponse
     {
         //TODO: Solo se puede eliminar si no tiene posts asociados.
-        $category->delete();
+
+        $deleteCategoryController = new DeleteCategoryController();
+        $deleteCategoryController($category->id);
+
         return redirect()->route('admin.categories.index')->with('success', 'Category deleted successfully.');
     }
 }

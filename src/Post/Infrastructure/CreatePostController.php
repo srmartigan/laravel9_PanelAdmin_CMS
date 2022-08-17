@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Src\Post\Infrastructure;
 
 use Src\Post\Application\CreatePostUseCase;
-use Src\Post\Domain\Post;
 
 final class CreatePostController {
 

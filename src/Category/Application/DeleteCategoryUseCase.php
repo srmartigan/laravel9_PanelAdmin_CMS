@@ -14,7 +14,7 @@ class DeleteCategoryUseCase
         $this->categoryRepository = $categoryRepository;
     }
 
-    public function __invoke(string $id): void
+    public function __invoke(int $id): void
     {
         $category = $this->categoryRepository->find(new CategoryId($id));
         $this->categoryRepository->delete($category);

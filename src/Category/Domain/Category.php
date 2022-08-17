@@ -36,6 +36,10 @@ class Category
     {
         return $this->id;
     }
+    public function setId(int $id): void
+    {
+        $this->id = new CategoryId($id);
+    }
 
     public function name(): CategoryName
     {
